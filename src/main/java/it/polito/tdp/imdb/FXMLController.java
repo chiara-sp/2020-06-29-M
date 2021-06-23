@@ -87,6 +87,25 @@ public class FXMLController {
     @FXML
     void doRicorsione(ActionEvent event) {
 
+    	txtResult.clear();
+    	int c;
+    	Director director= this.boxRegista.getValue();
+    	if(director==null) {
+    		txtResult.appendText("ricordarsi di creare prima il grafo e poi selezioanre un regista");
+    		return;
+    	}
+    	try {
+    		c= Integer.parseInt(this.txtAttoriCondivisi.getText());
+    	}catch(NumberFormatException e) {
+    		txtResult.appendText("indicare il numero massimo di attori condivisi");
+    		return;
+    	}
+    	List<Director>lista=model.trovaSequenza(director, c);
+    	txtResult.appendText("Sequenza proposta: con "+model.getAttoriCondivisi()+" attori condivisi \n");
+    	for(Director d: lista ) {
+    		txtResult.appendText(d.toString()+"\n");
+    	}
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
